@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+message RecordId {
+    string timestamp = 1;   // BigDecimal in LoadCellJson.java
+    int64 sequenceNumber = 2;
+}
+
+message DeviceData {
+    map<string, int64> timeStampToDeviceData = 1;
+}
+
+message Coordinates {
+    map<string, string> dimensionToValue = 1;   // map's value was BigDecimal in LoadCellJson.java
+}
+
+message DeviceLocation {
+    map<string, Coordinates> orientationTypeToCoordinates = 1;
+}
+
+message LoadCell {
+
+    RecordId recordId = 1;
+    string Id = 2;
+    map<string, DeviceData> lc = 3;    // DeviceId to DeviceData
+    string store = 4;
+    string entity = 5;
+    map<string, DeviceLocation> timestampToDeviceLocation = 6;  // map's key(timestamp) was BigDecimal in LoadCellJson.java
+
+}
